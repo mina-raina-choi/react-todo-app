@@ -1,0 +1,23 @@
+.form {
+    display: flex;
+}
+
+.form input {
+    flex: 1;
+    border-style: none;
+    margin-right: 10px;
+    border-bottom: 1px solid #22b8cf;
+    outline: none;
+
+}
+
+.form input:focus {
+    background: #3bc9db;
+}
+
+.form .create-button {
+    background: #22b8cf;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
