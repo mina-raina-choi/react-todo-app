@@ -2,12 +2,17 @@ import React , { Component } from 'react';
 import TodoItem from './TodoItem';
 
 class TodoItemList extends Component {
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return this.props.todos !== nextProps.todos;
+    }
+
     render() {
 
         // todos: todo객체가 있는 배열
         // onToggle: 체크박스 체크켜고 끄는 함수
         // onRemove: 아이템삭제함수
-        const { todos, onToggle, onRemove } = this.props;
+        const { todos, onToggle, onRemove, color } = this.props;
 
 
         const todoList = todos.map(
@@ -19,6 +24,7 @@ class TodoItemList extends Component {
                     onToggle={onToggle}
                     onRemove ={onRemove}
                     key={id}
+                    color={color}
                 />
             )
         );

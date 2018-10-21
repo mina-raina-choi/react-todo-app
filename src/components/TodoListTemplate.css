@@ -24,3 +24,8 @@
 .todos-wrapper {
     min-height: 5rem;
 }
+
+.palette-wrapper {
+    padding: 1rem;
+    background: #eeeeee;
+}

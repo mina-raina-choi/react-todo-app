@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import TodoListTemplate from './components/TodoListTemplate';
 import Form from './components/Form';
 import TodoItemList from './components/TodoItemList';
+import Palette from './components/Palette';
 
 class App extends Component {
 
   id = 3;
+  colors= ['#343a40', '#f03e3e', '#12b886', '#228ae6'];
 
   state = {
     input: '',
@@ -13,7 +15,8 @@ class App extends Component {
       { id: 0, text: ' 리액트 소개', checked: false },
       { id: 1, text: ' 리액트 소개', checked: true },
       { id: 2, text: ' 리액트 소개', checked: false }
-    ]
+    ],
+    color: '#343a40'
   }
 
 
@@ -24,7 +27,6 @@ class App extends Component {
     })
   }
 
- 
 
   // todos업데이트
   handleCreate = () => {
@@ -74,8 +76,15 @@ class App extends Component {
     });
   }
 
+  handleSelected = (selectedColor) => {
+    const {color} = this.state;
+    this.setState({
+      color : selectedColor
+    })
+  }
+
   render() {
-    const { input, todos } = this.state;
+    const { input, todos, color } = this.state;
 
     // this.handleChange 이렇게 사용해야하는데, 매번 this 붙이는 작업을 생략
     const {
@@ -83,19 +92,23 @@ class App extends Component {
       handleCreate,
       handleKeyPress,
       handleToggle,
-      handleRemove
+      handleRemove,
+      handleSelected
     } = this;
 
 
     return (
-      <TodoListTemplate form={
+      <TodoListTemplate 
+      palette={<Palette colors={this.colors} selected={color} onSelect={handleSelected}/>}
+      form={
         <Form
           value={input}
           onKeyPress={handleKeyPress}
           onChange={handleChange}
           onCreate={handleCreate}
+          color={color}
         />}>
-        <TodoItemList todos={todos} onToggle={handleToggle} onRemove={handleRemove}/>
+        <TodoItemList todos={todos} onToggle={handleToggle} onRemove={handleRemove} color={color}/>
       </TodoListTemplate>
     );
   }
