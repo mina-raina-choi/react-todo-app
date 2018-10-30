@@ -4,7 +4,7 @@ import './TodoItem.css';
 class TodoItem extends Component {
 
     shouldComponentUpdate(nextProps, nextState) {
-        return this.props.checked !== nextProps.checked;
+        return this.props.done !== nextProps.done;
     }
 
     render() {
@@ -13,20 +13,24 @@ class TodoItem extends Component {
         // id: todo id
         // onToggle: 체크박스 온오프 함수
         // onRemove: todo 삭제 함수
-        const { text, checked, id, onToggle, onRemove, color } = this.props;
-        
+        const { text, done, id, onToggle, onRemove, color } = this.props;
+
         return (
-            <div className="todo-item" onClick={() => onToggle(id)}>
+            <div className="todo-item" onClick={
+                // () => onToggle(id)
+                onToggle
+                }>
                 <div className="remove" onClick={(e) =>{
+                    onRemove();
                     e.stopPropagation(); // 부모태그로 이벤트 전달안되도록
-                    onRemove(id);
+                    // onRemove(id);
                 }}>&times;
                 </div>
-                <div className={`todo-text ${ checked ? ' checked' : '' }`} style={{color: color}}>
+                <div className={`todo-text ${ done ? ' done' : '' }`} style={{color: color}}>
                     <div>{text}</div>
                 </div>
                 {
-                    checked && (<div className="check-mark">✓</div>)
+                    done && (<div className="check-mark">✓</div>)
                 }
             </div>
         )

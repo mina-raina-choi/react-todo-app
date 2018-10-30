@@ -32,7 +32,7 @@
     word-break: break-all;
 }
 
-.checked {
+.done {
     color: #888888;
     text-decoration: line-through;
 }

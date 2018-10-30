@@ -1,4 +1,4 @@
-import React , { Component } from 'react';
+import React, { Component } from 'react';
 import TodoItem from './TodoItem';
 
 class TodoItemList extends Component {
@@ -16,17 +16,30 @@ class TodoItemList extends Component {
 
 
         const todoList = todos.map(
-            ({id, text, checked}) => (
+            todo => (
                 <TodoItem
-                    id={id}
-                    text={text}
-                    checked= {checked}
-                    onToggle={onToggle}
-                    onRemove ={onRemove}
-                    key={id}
-                    color={color}
+                    id={todo.get('id')}
+                    key={todo.get('id')}
+                    text={todo.get('text')}
+                    done={todo.get('done')}
+                    // onToggle={onToggle}
+                    // onRemove ={onRemove}
+                    onToggle={() => onToggle(todo.get('id'))}
+                    onRemove={() => onRemove(todo.get('id'))}
+                    key={todo.get('id')}
                 />
             )
+            // ({id, text, checked}) => (
+            //     <TodoItem
+            //         id={id}
+            //         text={text}
+            //         checked= {checked}
+            //         onToggle={onToggle}
+            //         onRemove ={onRemove}
+            //         key={id}
+            //         // color={color}
+            //     />
+            // )
         );
 
         return (
